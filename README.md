@@ -24,7 +24,7 @@ chmod +x /root/.routerd/cosmovisor/genesis/bin/routerd
 sudo ln -s /root/.routerd/cosmovisor/genesis /root/.routerd/cosmovisor/current -f
 sudo ln -s /root/.routerd/cosmovisor/current/bin/routerd /usr/bin/routerd -f
 ```
-Install Cosmovisor and create a service
+
 ### Download and install Cosmovisor
 ```
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
@@ -37,7 +37,7 @@ Description=router node service
 After=network-online.target
 
 [Service]
-User=$USER
+User=root
 ExecStart=$(which cosmovisor) run start
 Restart=on-failure
 RestartSec=10
