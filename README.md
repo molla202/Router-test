@@ -58,7 +58,9 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable routerd.service
 ```
-
+```
+sudo wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/internal/api/libwasmvm.x86_64.so
+```
 ### Set node configuration
 ```
 routerd config chain-id router_9601-1
