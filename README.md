@@ -95,3 +95,17 @@ sed -i -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:15217\"
 ```
 sudo systemctl start routerd.service && sudo journalctl -u routerd.service -f --no-hostname -o cat
 ```
+
+
+
+
+#### Upgrade
+
+cd $HOME
+rm -rf router-chain-releases
+git clone https://github.com/router-protocol/router-chain-releases
+
+# Prepare binaries for Cosmovisor
+mkdir -p /root/.routerd/cosmovisor/upgrades/xxx/bin
+mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/xxx/bin/
+
