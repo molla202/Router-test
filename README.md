@@ -56,7 +56,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable routerd.service
 ```
-Initialize the node
+
 ### Set node configuration
 ```
 routerd config chain-id router_9601-1
