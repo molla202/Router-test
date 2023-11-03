@@ -102,14 +102,17 @@ sudo systemctl start routerd.service && sudo journalctl -u routerd.service -f --
 
 
 
-
+--------------------------------------
 #### Upgrade
-
+```
 cd $HOME
 rm -rf router-chain-releases
 git clone https://github.com/router-protocol/router-chain-releases
-
+cd router-chain-releases/linux
+tar -xvf routerd.tar
+```
 # Prepare binaries for Cosmovisor
+```
 mkdir -p /root/.routerd/cosmovisor/upgrades/xxx/bin
 mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/xxx/bin/
-
+```
