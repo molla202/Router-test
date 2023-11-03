@@ -100,8 +100,26 @@ sed -i -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:15217\"
 sudo systemctl start routerd.service && sudo journalctl -u routerd.service -f --no-hostname -o cat
 ```
 
+### Snap
+```
+sudo systemctl stop routerd
+
+cp $HOME/.routerd/data/priv_validator_state.json $HOME/.routerd/priv_validator_state.json.backup
+
+rm -rf $HOME/.routerd/data
+
+rm -rf $HOME/.routerd/wasm
+
+SNAP_NAME=$(curl -s https://ss-t.router.nodestake.top/ | egrep -o ">20.*\.tar.lz4" | tr -d ">")
+
+curl -o - -L https://ss-t.router.nodestake.top/${SNAP_NAME}  | lz4 -c -d - | tar -x -C $HOME/.routerd
+
+mv $HOME/.routerd/priv_validator_state.json.backup $HOME/.routerd/data/priv_validator_state.json
 
 
+sudo systemctl restart routerd
+journalctl -u routerd -fo cat
+```
 --------------------------------------
 #### Upgrade
 ```
