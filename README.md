@@ -1,4 +1,4 @@
-
+Not: Need ubuntu 22
 ### UPDATE SYSTEM AND INSTALL BUILD TOOLS
 ```
 sudo apt -q update
@@ -18,6 +18,8 @@ mkdir -p /root/.routerd/cosmovisor/genesis/bin
 git clone https://github.com/router-protocol/router-chain-releases
 cd router-chain-releases/linux
 tar -xvf routerd.tar
+mkdir -p /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin
+cp /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin/
 mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/genesis/bin/routerd
 chmod +x /root/.routerd/cosmovisor/genesis/bin/routerd
 ```
@@ -79,6 +81,8 @@ curl -Ls https://ss-t.router.nodestake.top/addrbook.json > $HOME/.routerd/config
 ### Add seeds
 ```
 sed -i -e "s|^seeds *=.*|seeds = \"89ec0f07f0ccb61ec19fb8256043cf92e73abd2b@15.206.157.168:26656,50dc3cca9f3b3f969b812e5760bcaf652aaecc01@43.205.136.8:26656,3df6cb2db301288c492f9ace1b88360e0504b15a@13.235.115.79:26656\"|" $HOME/.routerd/config/config.toml
+
+sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0router\"|" $HOME/.routerd/config/app.toml
 ```
 
 ### Set pruning
@@ -131,6 +135,6 @@ tar -xvf routerd.tar
 ```
 # Prepare binaries for Cosmovisor
 ```
-mkdir -p /root/.routerd/cosmovisor/upgrades/xxx/bin
-mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/xxx/bin/
+mkdir -p /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin
+mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin/
 ```
