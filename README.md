@@ -16,6 +16,8 @@ eval $(echo 'export PATH=$PATH:$HOME/go/bin' | tee -a $HOME/.profile)
 ```
 mkdir -p /root/.routerd/cosmovisor/genesis/bin
 git clone https://github.com/router-protocol/router-chain-releases
+cd router-chain-releases/linux
+tar -xvf routerd.tar
 mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/genesis/bin/routerd
 chmod +x /root/.routerd/cosmovisor/genesis/bin/routerd
 ```
