@@ -136,5 +136,5 @@ tar -xvf routerd.tar
 # Prepare binaries for Cosmovisor
 ```
 mkdir -p /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin
-mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin/
+mv /root/router-chain-releases/linux/routerd /root/.routerd/cosmovisor/upgrades/v1.2.1-to-v1.2.2/bin/routerd
 ```
