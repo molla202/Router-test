@@ -75,8 +75,8 @@ routerd init corenode --chain-id router_9601-1
 ```
 ### Download genesis and addrbook
 ```
-curl -Ls https://ss-t.router.nodestake.top/genesis.json > $HOME/.routerd/config/genesis.json 
-curl -Ls https://ss-t.router.nodestake.top/addrbook.json > $HOME/.routerd/config/addrbook.json 
+curl -s https://ss.nodeist.net/t/router/genesis.json > $HOME/.routerd/config/genesis.json
+curl -s https://ss.nodeist.net/t/router/addrbook.json > $HOME/.routerd/config/addrbook.json
 ```
 ### Add seeds && peer && gas && puring
 ```
