@@ -78,22 +78,21 @@ routerd init corenode --chain-id router_9601-1
 curl -Ls https://ss-t.router.nodestake.top/genesis.json > $HOME/.routerd/config/genesis.json 
 curl -Ls https://ss-t.router.nodestake.top/addrbook.json > $HOME/.routerd/config/addrbook.json 
 ```
-### Add seeds
+### Add seeds && peer && gas && puring
 ```
-sed -i -e "s|^seeds *=.*|seeds = \"89ec0f07f0ccb61ec19fb8256043cf92e73abd2b@15.206.157.168:26656,50dc3cca9f3b3f969b812e5760bcaf652aaecc01@43.205.136.8:26656,3df6cb2db301288c492f9ace1b88360e0504b15a@13.235.115.79:26656\"|" $HOME/.routerd/config/config.toml
+SEEDS="36eb478177e691b3389cdc60ed618c57f2a4acd7@13.127.150.80:26656,16bc9a252c2cb82c6aefdc82826f7d7021114f0a@13.127.165.58:26656,074d7d3c5d142cbec150093086055d73be0080cf@35.178.32.171:26656"
+PEERS="36eb478177e691b3389cdc60ed618c57f2a4acd7@13.127.150.80:26656,16bc9a252c2cb82c6aefdc82826f7d7021114f0a@13.127.165.58:26656,074d7d3c5d142cbec150093086055d73be0080cf@35.178.32.171:26656"
+sed -i 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.routerd/config/config.toml
 
-sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0router\"|" $HOME/.routerd/config/app.toml
+sed -i 's|^pruning *=.*|pruning = "custom"|g' $HOME/.routerd/config/app.toml
+sed -i 's|^pruning-keep-recent  *=.*|pruning-keep-recent = "100"|g' $HOME/.routerd/config/app.toml
+sed -i 's|^pruning-interval *=.*|pruning-interval = "10"|g' $HOME/.routerd/config/app.toml
+sed -i 's|^snapshot-interval *=.*|snapshot-interval = 0|g' $HOME/.routerd/config/app.toml
+
+sed -i 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.025urouter"|g' $HOME/.routerd/config/app.toml
+sed -i 's|^prometheus *=.*|prometheus = true|' $HOME/.routerd/config/config.toml
 ```
 
-### Set pruning
-```
-sed -i \
-  -e 's|^pruning *=.*|pruning = "custom"|' \
-  -e 's|^pruning-keep-recent *=.*|pruning-keep-recent = "100"|' \
-  -e 's|^pruning-keep-every *=.*|pruning-keep-every = "0"|' \
-  -e 's|^pruning-interval *=.*|pruning-interval = "19"|' \
-  /root/.routerd/config/app.toml
-```
 ### Set custom ports
 ```
 sed -i -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:15258\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:15257\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:15260\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:15256\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":15266\"%" /root/.routerd/config/config.toml
